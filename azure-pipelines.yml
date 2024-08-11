@@ -17,10 +17,18 @@ steps:
     orchestratorConnection: 'UiPathOrchestratorConnection'
     outputPath: '$(Build.ArtifactStagingDirectory)\Output'
 
+# Download secure file v1
+# Download a secure file to the agent machine.
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: "NuGet Test Developer.cer" # string. Required. Secure File"". 
+    #retryCount: '8' # string. Retry Count. Default: 8.
+    #socketTimeout: # string. Socket Timeout.
+
 - task: NuGetCommand@2
   inputs:
     command: 'custom'
-    arguments: 'nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath <PathToTheCertificate> -Timestamper <TimestampServiceURL>'
+    arguments: 'nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath $(mySecureFile.secureFilePath)'
 
 - task: NuGetCommand@2
   inputs:
