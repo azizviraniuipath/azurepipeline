@@ -19,6 +19,11 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
+    command: 'custom'
+    arguments: 'nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath <PathToTheCertificate> -Timestamper <TimestampServiceURL>'
+
+- task: NuGetCommand@2
+  inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     nuGetFeedType: 'internal'
