@@ -26,9 +26,10 @@ steps:
     #socketTimeout: # string. Socket Timeout.
 
 - task: NuGetCommand@2
+  displayName: 'Download CA certificate'
   inputs:
     command: 'custom'
-    arguments: 'nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath $(mySecureFile.secureFilePath)'
+    arguments: 'dotnet nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath $(mySecureFile.secureFilePath)'
 
 - task: NuGetCommand@2
   inputs:
