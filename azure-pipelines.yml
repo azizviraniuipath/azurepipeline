@@ -29,7 +29,7 @@ steps:
   displayName: 'Download CA certificate'
   inputs:
     command: 'custom'
-    arguments: 'dotnet nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath $(mySecureFile.secureFilePath)'
+    arguments: 'dotnet nuget sign$(Build.ArtifactStagingDirectory)/**/*.nupkg -CertificatePath$(mySecureFile.secureFilePath)'
 
 - task: NuGetCommand@2
   inputs:
