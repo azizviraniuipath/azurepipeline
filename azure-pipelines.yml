@@ -27,14 +27,9 @@ steps:
     #socketTimeout: # string. Socket Timeout.
 
 - task: NuGetCommand@2
-  displayName: 'Signing certificate'
-  inputs:
-    command: 'custom'
-    arguments: 'dotnet nuget sign $(Build.ArtifactStagingDirectory)/**/*.nupkg --certificate-path $(mySecureFile.secureFilePath)--certificate-password "1234"'
-
-- task: NuGetCommand@2
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: 'dd4a15f0-4dce-4f4a-beeb-5e8bfdb0d35e/dc984a49-3241-496c-b80e-17f8d1e7a1eb'
+
